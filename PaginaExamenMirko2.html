@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Unidad I</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .correct-answer {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #155724;
+        }
+        .wrong-answer {
+            font-size: 14px;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Evaluación Unidad I</h1>
+        <form id="quizForm">
+            <div class="question">
+                <h2>1. ¿Es posible usar CardViews directamente sobre un Activity o Fragment?</h2>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="incorrecto"> Falso</label>
+                    <label><input type="radio" name="q1" value="correcto"> Verdadero</label>
+                </div>
+                <div id="q1-feedback" class="correct-answer" style="display: none;">Respuesta correcta: Verdadero</div>
+            </div>
+
+            <div class="question">
+                <h2>2. ¿En qué generación se deja de utilizar la conmutación basada en circuitos para voz?</h2>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="incorrecto"> 1G</label>
+                    <label><input type="radio" name="q2" value="correcto"> 4G</label>
+                    <label><input type="radio" name="q2" value="incorrecto"> 3G</label>
+                    <label><input type="radio" name="q2" value="incorrecto"> 5G</label>
+                </div>
+                <div id="q2-feedback" class="correct-answer" style="display: none;">Respuesta correcta: 4G</div>
+            </div>
+
+            <div class="question">
+                <h2>3. En la evolución de las telecomunicaciones móviles se tienen en cuenta los siguientes aspectos:</h2>
+                <div class="options">
+                    <label><input type="checkbox" name="q3" value="inmersion"> Inmersión</label>
+                    <label><input type="checkbox" name="q3" value="calidad"> Impacto de calidad</label>
+                    <label><input type="checkbox" name="q3" value="reglamentarias"> Medidas reglamentarias</label>
+                    <label><input type="checkbox" name="q3" value="tecnologias"> Adopción de nuevas tecnologías</label>
+                    <label><input type="checkbox" name="q3" value="desarrollo"> Desarrollo</label>
+                    <label><input type="checkbox" name="q3" value="mercado"> Estructura del mercado</label>
+                </div>
+                <div id="q3-feedback" class="correct-answer" style="display: none;">Respuestas correctas: Impacto de calidad, Adopción de nuevas tecnologías, Desarrollo</div>
+            </div>
+
+            <div class="question">
+                <h2>4. ¿Qué elementos son importantes en cada proyecto de Android?</h2>
+                <div class="options">
+                    <label><input type="checkbox" name="q4" value="bin"> bin/</label>
+                    <label><input type="checkbox" name="q4" value="res"> res/</label>
+                    <label><input type="checkbox" name="q4" value="src"> src/</label>
+                    <label><input type="checkbox" name="q4" value="sdk"> sdk</label>
+                    <label><input type="checkbox" name="q4" value="build"> build.xml</label>
+                </div>
+                <div id="q4-feedback" class="correct-answer" style="display: none;">Respuestas correctas: bin/, res/, src/, sdk, build.xml</div>
+            </div>
+
+            <div class="question">
+                <h2>5. Es un archivo esencial en todas las aplicaciones. Se declara en el directorio raíz y contiene información sobre la aplicación que el sistema Android debe conocer antes de que se puedan ejecutar los códigos:</h2>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="incorrecto"> build.gradle</label>
+                    <label><input type="radio" name="q5" value="correcto"> AndroidManifest.xml</label>
+                </div>
+                <div id="q5-feedback" class="correct-answer" style="display: none;">Respuesta correcta: AndroidManifest.xml</div>
+            </div>
+
+            <div class="question">
+                <h2>6. Android como sistema operativo para móviles fue construido sobre Linux Kernel (versión):</h2>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="correcto"> 2.6</label>
+                </div>
+                <div id="q6-feedback" class="correct-answer" style="display: none;">Respuesta correcta: 2.6</div>
+            </div>
+
+            <div class="question">
+                <h2>7. Es la capa que brinda interfaces estándares que exponen las capacidades de hardware del dispositivo al framework de la API de Java de nivel más alto:</h2>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="correcto"> HAL</label>
+                </div>
+                <div id="q7-feedback" class="correct-answer" style="display: none;">Respuesta correcta: HAL</div>
+            </div>
+
+            <div class="question">
+                <h2>8. ¿En qué generación aparece la itinerancia internacional (roaming)?</h2>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="correcto"> 1G</label>
+                </div>
+                <div id="q8-feedback" class="correct-answer" style="display: none;">Respuesta correcta: 1G</div>
+            </div>
+
+            <div class="question">
+                <h2>9. El panorama actual de las plataformas de desarrollo se caracteriza por:</h2>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="correcto"> La coexistencia de propuestas nativas y multiplataforma, cada una de ellas con sus propias ventajas e inconvenientes.</label>
+                </div>
+                <div id="q9-feedback" class="correct-answer" style="display: none;">Respuesta correcta: La coexistencia de propuestas nativas y multiplataforma, cada una de ellas con sus propias ventajas e inconvenientes.</div>
+            </div>
+
+            <div class="question">
+                <h2>10. ¿Cómo se llama la versión de Android que marca la pauta de los cambios de máquina virtual?</h2>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="correcto"> LOLLIPOP</label>
+                </div>
+                <div id="q10-feedback" class="correct-answer" style="display: none;">Respuesta correcta: LOLLIPOP</div>
+            </div>
+
+            <button type="button" onclick="calcularResultados()">Enviar Respuestas</button>
+        </form>
+        <div id="resultado" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function calcularResultados() {
+            const form = document.getElementById('quizForm');
+            const resultadoDiv = document.getElementById('resultado');
+
+            let correctas = 0;
+            const respuestasCorrectas = {
+                q1: 'correcto',
+                q2: 'correcto',
+                q3: ['calidad', 'tecnologias', 'desarrollo'],
+                q4: ['bin', 'res', 'src', 'sdk', 'build'],
+                q5: 'correcto',
+                q6: 'correcto',
+                q7: 'correcto',
+                q8: 'correcto',
+                q9: 'correcto',
+                q10: 'correcto'
+            };
+
+            const formData = new FormData(form);
+            for (let [key, value] of formData.entries()) {
+                const feedback = document.getElementById(`${key}-feedback`);
+                if (Array.isArray(respuestasCorrectas[key])) {
+                    const selected = form.querySelectorAll(`input[name="${key}"]:checked`);
+                    const selectedValues = Array.from(selected).map(input => input.value);
+                    if (JSON.stringify(selectedValues.sort()) === JSON.stringify(respuestasCorrectas[key].sort())) {
+                        correctas++;
+                        feedback.style.display = 'block';
+                    } else {
+                        feedback.style.display = 'block';
+                        feedback.classList.add('wrong-answer');
+                    }
+                } else if (respuestasCorrectas[key] === value) {
+                    correctas++;
+                    feedback.style.display = 'block';
+                } else {
+                    feedback.style.display = 'block';
+                    feedback.classList.add

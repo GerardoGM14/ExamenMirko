@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question h3 {
+            margin-bottom: 10px;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 10px;
+        }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .animate {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cuestionario Interactivo</h1>
+
+        <div id="quiz"></div>
+
+        <button class="btn" onclick="submitQuiz()">Enviar Respuestas</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "ANDROID COMO SISTEMA OPERATIVO PARA MÓVILES FUE CONSTRUIDO SOBRE LINUX KERNEL (VERSION)",
+                options: ["2.2", "2.6", "3.1", "4.0"],
+                answer: "2.6"
+            },
+            {
+                text: "¿En qué generación se deja de utilizar la conmutación basada en circuitos para voz?",
+                options: ["5G", "1G", "4G", "3G", "2G"],
+                answer: "4G"
+            },
+            {
+                text: "EN LA ERA DEL HIPERCONECTIVIDAD SE CONSIDERA:",
+                options: ["Emblema del siglo XX", "Se considera al móvil como una 'nueva carne'", "El móvil tiene la capacidad de fácil transporte y movimiento", "Sus redes y sistemas descansan y funcionan 24/7", "Actualmente la cobertura es como el aire que respiramos"],
+                answer: ["Se considera al móvil como una 'nueva carne'", "El móvil tiene la capacidad de fácil transporte y movimiento", "Actualmente la cobertura es como el aire que respiramos"]
+            },
+            {
+                text: "ES LA CAPA QUE BRINDA INTERFACES ESTÁNDARES QUE EXPONEN LAS CAPACIDADES DE HARDWARE DEL DISPOSITIVO AL FRAMEWORK DE LA API DE JAVA DE NIVEL MÁS ALTO",
+                options: ["HAL", "Kernel", "Framework", "Driver"],
+                answer: "HAL"
+            },
+            {
+                text: "ES UN ARCHIVO ESENCIAL EN TODAS LAS APLICACIONES. SE DECLARA EN EL DIRECTORIO RAÍZ Y CONTIENE INFORMACIÓN SOBRE LA APLICACIÓN QUE EL SISTEMA ANDROID DEBE CONOCER ANTES DE QUE SE PUEDAN EJECUTAR LOS CÓDIGOS",
+                options: ["AndroidManifest.xml", "Config.xml", "Main.xml", "AppConfig.xml"],
+                answer: "AndroidManifest.xml"
+            },
+            {
+                text: "SE RECOMIENDA EVITAR EL USO DE ESTE TIPO DE LAYOUT... (EXCEPTUAR EL TÉRMINO LAYOUT AL FINAL DE LA PALABRA)",
+                options: ["Absolute", "Relative", "Linear", "Constraint"],
+                answer: "Absolute"
+            },
+            {
+                text: "ES POSIBLE USAR CARDVIEWS DIRECTAMENTE SOBRE UN ACTIVITY O FRAGMENT, SIN SITUARLOS AL INTERIOR DE UN RECYCLERVIEW",
+                options: ["Verdadero", "Falso"],
+                answer: "Verdadero"
+            },
+            {
+                text: "¿CÓMO SE LLAMA LA VERSIÓN DE ANDROID QUE MARCA LA PAUTA DE LOS CAMBIOS DE MÁQUINA VIRTUAL?",
+                options: ["Lollipop", "KitKat", "Jelly Bean", "Marshmallow"],
+                answer: "Lollipop"
+            },
+            {
+                text: "EN LA EVOLUCIÓN DE LAS TELECOMUNICACIONES MÓVILES SE TIENEN EN CUENTA LOS SIGUIENTES ASPECTOS:",
+                options: ["Medidas Reglamentarias", "Desarrollo", "Impacto de Calidad", "Invasión del Mercado", "Estructura del Mercado", "Adopción de Nuevas Tecnologías", "Inmersión"],
+                answer: ["Desarrollo", "Impacto de Calidad", "Adopción de Nuevas Tecnologías"]
+            },
+            {
+                text: "ES UN SISTEMA DE GESTIÓN DE BASES DE DATOS RELACIONAL COMPATIBLE CON ACID, CONTENIDA EN UNA RELATIVAMENTE PEQUEÑA EN C",
+                options: ["SQLite", "MySQL", "PostgreSQL", "MongoDB"],
+                answer: "SQLite"
+            },
+            {
+                text: "SE LES CONOCE COMO CONTENEDORES Y SIRVEN PARA REORGANIZAR LOS ELEMENTOS DE NUESTRA APLICACIÓN. SUS HIJOS SON LOS VIEWS",
+                options: ["Linear", "Relative", "Constraint", "Frame"],
+                answer: "Linear"
+            },
+            {
+                text: "¿QUÉ ELEMENTOS SON IMPORTANTES EN CADA PROYECTO DE ANDROID?",
+                options: ["bin/", "java", "sdk", "kotlin", "src/", "dalvin", "build.xml", "res/"],
+                answer: ["bin/", "sdk", "src/", "build.xml", "res/"]
+            },
+            {
+                text: "¿CUÁLES SON LOS OBJETIVOS DE ESTA NUEVA ESTRUCTURA DE TELECOMUNICACIONES?",
+                options: ["Ninguna de las Anteriores", "Crear mayores tasas de transferencias de datos", "Volver a incorporar la conmutación de circuitos", "Focalizar esta estructura a un escenario y entorno empresarial", "Todas las Anteriores", "Soportar un mayor número de conexiones simultáneas"],
+                answer: ["Crear mayores tasas de transferencias de datos", "Soportar un mayor número de conexiones simultáneas"]
+            },
+            {
+                text: "LA INTERFAZ DE USUARIO SE DEFINE EN LOS ARCHIVOS XML DEL DIRECTORIO RES/LAYOUT. CADA PANTALLA TENDRÁ EL MISMO CÓDIGO XML",
+                options: ["Verdadero", "Falso"],
+                answer: "Falso"
+            },
+            {
+                text: "EL PANORAMA ACTUAL DE LAS PLATAFORMAS DE DESARROLLO SE CARACTERIZA POR...",
+                options: ["La coexistencia de propuestas nativas y multiplataforma, cada una de ellas con sus propias ventajas e inconvenientes.", "El predominio de las plataformas nativas, que son las únicas aptas para los smartphones.", "Las aproximaciones multiplataforma, que se basan en el uso de las tecnologías web.", "Android e iOS, que son las dos únicas plataformas de desarrollo nativas existentes."],
+                answer: "La coexistencia de propuestas nativas y multiplataforma, cada una de ellas con sus propias ventajas e inconvenientes."
+            },
+            {
+                text: "INDICA CUÁLES DE ESTAS OPCIONES SON CARACTERÍSTICAS POSITIVAS DE LOS DISPOSITIVOS MÓVILES",
+                options: ["Gran Tamaño", "Recurso computacional", "Interactivo", "Tienen aplicaciones complejas", "Integra sensores y actuadores", "Incorpora conmutación de circuitos", "Fácilmente transportable", "Todas las Anteriores"],
+                answer: ["Recurso computacional", "Interactivo", "Integra sensores y actuadores", "Fácilmente transportable"]
+            },
+            {
+                text: "DENTRO DEL CICLO DE VIDA DE UN FRAGMENTO ONCREATEVIEW, SE LLAMA CUANDO EL FRAGMENTO SERÁ DIBUJADO POR PRIMERA VEZ EN LA INTERFAZ DE USUARIO",
+                options: ["Verdadero", "Falso"],
+                answer: "Verdadero"
+            },
+            {
+                text: "UNA DE LAS CARACTERÍSTICAS DE ANDROID ES QUE TIENEN UN NAVEGADOR INTEGRADO BASADO EN LA APERTURA DEL MOTOR",
+                options: ["WebKit", "Blink", "Gecko", "Trident"],
+                answer: "WebKit"
+            },
+            {
+                text: "ES EL CONJUNTO DE DATOS QUE SE ESPERA MOSTRAR EN EL RECYCLERVIEW. SE PUEDE REPRESENTAR POR UN SIMPLE ARRAY DE OBJETOS STRING",
+                options: ["Dataset", "Array", "Collection", "Bundle"],
+                answer: "Dataset"
+            },
+            {
+                text: "¿EN QUÉ GENERACIÓN APARECE LA ITINERANCIA INTERNACIONAL (ROAMING)?",
+                options: ["5G", "1G", "3G", "4G", "2G"],
+                answer: "1G"
+            }
+        ];
+
+        function renderQuiz() {
+            const quizContainer = document.getElementById("quiz");
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question");
+
+                const questionText = document.createElement("h3");
+                questionText.textContent = `Pregunta ${index + 1}: ${question.text}`;
+                questionDiv.appendChild(questionText);
+
+                const optionsList = document.createElement("ul");
+                optionsList.classList.add("options");
+
+                question.options.forEach((option) => {
+                    const optionItem = document.createElement("li");
+
+                    const optionInput = document.createElement("input");
+                    optionInput.type = Array.isArray(question.answer) ? "checkbox" : "radio";
+                    optionInput.name = `question-${index}`;
+                    optionInput.value = option;
+                    optionItem.appendChild(optionInput);
+
+                    const optionLabel = document.createElement("label");
+                    optionLabel.textContent = option;
+                    optionItem.appendChild(optionLabel);
+
+                    optionsList.appendChild(optionItem);
+                });
+
+                questionDiv.appendChild(optionsList);
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function submitQuiz() {
+            const feedbackElements = document.querySelectorAll(".feedback");
+            feedbackElements.forEach(el => el.remove());
+
+            questions.forEach((question, index) => {
+                const selectedOptions = document.querySelectorAll(`input[name='question-${index}']:checked`);
+                const selectedValues = Array.from(selectedOptions).map(option => option.value);
+                const feedback = document.createElement("div");
+                feedback.classList.add("feedback", "animate");
+
+                if (Array.isArray(question.answer)) {
+                    const correct = question.answer.every(ans => selectedValues.includes(ans)) && question.answer.length === selectedValues.length;
+                    feedback.textContent = correct ? "Correcto!" : "Incorrecto.";
+                    feedback.classList.add(correct ? "correct" : "incorrect");
+                } else {
+                    const correct = selectedValues[0] === question.answer;
+                    feedback.textContent = correct ? "Correcto!" : "Incorrecto.";
+                    feedback.classList.add(correct ? "correct" : "incorrect");
+                }
+
+                const questionDiv = document.querySelectorAll(".question")[index];
+                questionDiv.appendChild(feedback);
+            });
+        }
+
+        renderQuiz();
+    </script>
+</body>
+</html>
